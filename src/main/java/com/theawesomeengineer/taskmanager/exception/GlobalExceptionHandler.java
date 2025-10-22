@@ -15,29 +15,37 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Error> handleEntityNotFoundException(MethodArgumentNotValidException e) {
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, e);
+        Error error = new Error()
+                .message(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .details("Invalid input value")
+                .timestamp(OffsetDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Error> handleEntityNotFoundException(EntityNotFoundException e) {
-        return buildErrorResponse(HttpStatus.NOT_FOUND, e);
+        Error error = new Error()
+                .message(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .details(e.getMessage())
+                .timestamp(OffsetDateTime.now());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
     @ExceptionHandler(DataAccessException.class)
     public ResponseEntity<Error> handleDbUpdateException(DataAccessException e) {
-        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e);
+        Error error = new Error()
+                .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                .details("Database operation error")
+                .timestamp(OffsetDateTime.now());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> handleGeneralError(Exception e) {
-        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e);
-    }
-
-    private ResponseEntity<Error> buildErrorResponse(HttpStatus status, Exception e) {
         Error error = new Error()
-                .message(status.getReasonPhrase())
+                .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
                 .details(e.getMessage())
                 .timestamp(OffsetDateTime.now());
-        return ResponseEntity.status(status).body(error);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 }
