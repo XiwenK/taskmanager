@@ -1,0 +1,18 @@
+services:
+  mysql:
+    image: mysql:8.1
+    container_name: taskmanager-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: taskmanager
+      MYSQL_USER: taskuser
+      MYSQL_PASSWORD: taskpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./createdb.sql:/docker-entrypoint-initdb.d/createdb.sql:ro
+#      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql-data:
