@@ -53,7 +53,7 @@ until [ -f "$JAR_FILE" ]; do
 done
 
 echo "Running up project ..."
-# java -jar "$JAR_FILE"
-nohup java -jar "$JAR_FILE" > "$LOG_FILE" 2>&1 &
+java -jar "$JAR_FILE"
+#nohup java -jar "$JAR_FILE" > "$LOG_FILE" 2>&1 &
 
 
