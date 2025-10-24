@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Error> handleEntityNotFoundException(MethodArgumentNotValidException e) {
+    public ResponseEntity<Error> HandleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         Error error = new Error()
                 .message(HttpStatus.BAD_REQUEST.getReasonPhrase())
                 .details("Invalid input value")
