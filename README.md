@@ -114,7 +114,8 @@ Optional:
 
 ## API Documentation
 
-- **OpenAPI Specification**: Available at `/swagger-ui.html` when running
+- **OpenAPI Specification**: Available at `/swagger-ui.html` when running (code generation with
+  `./gradlew openApiGenerate`)
 - **Postman Collection**: Import `postman_collection.json` for testing
 
 ---
@@ -125,11 +126,13 @@ Describe your testing strategy and how to run tests.
 
 ### Unit Tests
 
-Manually run `TaskServiceTest.java / GlobalExceptionHandlerTest.java` to do unit testing.
+Manually run `TaskServiceTest.java / GlobalExceptionHandlerTest.java / TaskManagerApplicationTests.java` to do unit
+testing.
 
 ### Integration Tests
 
-Manually run `TaskApiIntegrationTest.java` to do integration testing.
+Before you do integration tests, please ensure you have run up the docker desktop.
+Then manually run `TaskApiIntegrationTest.java` to do integration testing.
 
 ---
 
